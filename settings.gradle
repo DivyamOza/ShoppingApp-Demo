@@ -10,6 +10,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        // Note: Here, We used for "com.github.ihsanbal:LoggingInterceptor"
+        maven { url 'https://jitpack.io' }
     }
 }
 rootProject.name = "Assesment Demo"
