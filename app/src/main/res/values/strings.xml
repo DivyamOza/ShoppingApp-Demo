@@ -1,6 +1,24 @@
 <resources>
     <string name="app_name">Assesment Demo</string>
+
+    <!-- Start 'item_gadgets.xml' file Strings -->
     <string name="lbl_star_for_rating">"★"</string>
     <string name="lbl_rupees">" ₹"</string>
+    <!-- End 'item_gadgets.xml' file Strings -->
+
+    <!-- Start Loader Strings -->
     <string name="lbl_loading">Loading…</string>
+    <!-- End Loader Strings -->
+
+    <!-- Start Toasts Messages Strings -->
+    <string name="lbl_no_internet">No Internet</string>
+    <string name="lbl_check_connection">Please check your Internet connection!!</string>
+    <string name="lbl_something_went_wrong">Something went wrong!</string>
+    <!-- End Toasts Messages Strings -->
+
+    <!-- Start API Responses Status Strings -->
+    <string name="lbl_success_status">Success</string>
+    <string name="lbl_loading_status">Loading</string>
+    <string name="lbl_error_status">Error</string>
+    <!-- End API Responses Status Strings -->
 </resources>
