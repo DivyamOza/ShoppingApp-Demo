@@ -1,5 +1,10 @@
 package com.divyamoza.assesmentdemo.models.responses
 
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.divyamoza.assesmentdemo.R
 import com.google.gson.annotations.SerializedName
 
 
@@ -12,6 +17,12 @@ import com.google.gson.annotations.SerializedName
 data class GadgetsResponse(
     @SerializedName("products") val products: List<Product> = listOf()
 ) {
+
+    /**
+     * To string
+     *
+     * @return
+     */
     override fun toString(): String {
         return "GadgetsResponse(products=$products)"
     }
@@ -33,8 +44,34 @@ data class Product(
     @SerializedName("price") val price: String? = "",
     @SerializedName("rating") val rating: Int? = 0
 ) {
+
+    /**
+     * To string
+     *
+     * @return
+     */
     override fun toString(): String {
         return "Product(image_url=$image_url, name=$name, price=$price, rating=$rating)"
+    }
+
+    companion object {
+        /**
+         * Load image from XML using DataBinding
+         *
+         * @param imageView
+         * @param imageUrl
+         */
+        @JvmStatic
+        @BindingAdapter("android:loadImage")
+        fun loadImage(imageView: ImageView?, imageUrl: String?) {
+            if (imageView != null) {
+                Glide.with(imageView)
+                    .load(imageUrl)
+                    .fitCenter()
+                    .apply(RequestOptions().error(R.drawable.ic_launcher_foreground))
+                    .into(imageView)
+            }
+        }
     }
 }
 
