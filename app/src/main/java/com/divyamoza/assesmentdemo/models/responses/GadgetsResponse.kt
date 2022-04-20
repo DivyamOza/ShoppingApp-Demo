@@ -40,7 +40,7 @@ data class GadgetsResponse(
  */
 data class Product(
     @SerializedName("image_url") val image_url: String? = "",
-    @SerializedName("image_url") val name: String? = "",
+    @SerializedName("name") val name: String? = "",
     @SerializedName("price") val price: String? = "",
     @SerializedName("rating") val rating: Int? = 0
 ) {
