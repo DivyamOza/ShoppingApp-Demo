@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    // Here we added kotlin-kapt to use '@BindingAdapter'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -28,6 +30,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    buildFeatures{
+        dataBinding true
+    }
+    dataBinding {
+        enabled = true
     }
 }
 
