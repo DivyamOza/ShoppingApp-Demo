@@ -2,4 +2,5 @@
     <string name="app_name">Assesment Demo</string>
     <string name="lbl_star_for_rating">"★"</string>
     <string name="lbl_rupees">" ₹"</string>
+    <string name="lbl_loading">Loading…</string>
 </resources>

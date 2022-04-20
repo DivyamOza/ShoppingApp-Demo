@@ -11,6 +11,7 @@ import com.divyamoza.assesmentdemo.base.BaseActivity
 import com.divyamoza.assesmentdemo.data.Status
 import com.divyamoza.assesmentdemo.databinding.ActivityHomeBinding
 import com.divyamoza.assesmentdemo.utils.NetworkUtils
+import com.divyamoza.assesmentdemo.utils.ProgressBarUtils
 import com.divyamoza.assesmentdemo.viewmodels.CommonViewModel
 import timber.log.Timber
 
@@ -23,7 +24,7 @@ import timber.log.Timber
 class HomeActivity : BaseActivity() {
     lateinit var binding: ActivityHomeBinding
     private lateinit var commonViewModel: CommonViewModel
-    // ToDO: Need to add progress dialog
+    private val progressBar: ProgressBarUtils = ProgressBarUtils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +41,7 @@ class HomeActivity : BaseActivity() {
      */
     private fun apiCallForGadgets() {
         if (NetworkUtils.isNetworkAvailable(context = AssesmentDemoApp.context)) {
-            //ToDO: Show ProgressBar
+            progressBar.showProgressBar(ctx = this)
             commonViewModel.getGadgetsInfo(activity = this)
         } else {
             Timber.e("getGadgets(): No Internet!!")
@@ -58,7 +59,7 @@ class HomeActivity : BaseActivity() {
             this, androidx.lifecycle.Observer {
                 when (it?.status) {
                     Status.SUCCESS -> {
-                        //ToDo: Dismiss Progress Dialog
+                        progressBar.dismissProgressBar()
                         //ToDo: Show success msg
                         Timber.d("Success!!!")
                         val gadgetsRecyclerAdapter =
@@ -74,12 +75,12 @@ class HomeActivity : BaseActivity() {
                         Timber.e("Loading!!!")
                     }
                     Status.ERROR -> {
-                        //ToDo: Dismiss Progress Dialog
+                        progressBar.dismissProgressBar()
                         //ToDo: Show error msg
                         Timber.e("Error!!!")
                     }
                     else -> {
-                        //ToDo: Dismiss Progress Dialog
+                        progressBar.dismissProgressBar()
                         Timber.e("Error!!!")
                         //ToDo: Show error msg
                     }
