@@ -7,6 +7,7 @@ import com.divyamoza.assesmentdemo.data.Resource
 import com.divyamoza.assesmentdemo.models.responses.CommonResponse
 import com.divyamoza.assesmentdemo.models.responses.GadgetsResponse
 import com.divyamoza.assesmentdemo.ui.activities.HomeActivity
+import com.divyamoza.assesmentdemo.utils.CommonUtils
 import com.divyamoza.assesmentdemo.utils.NetworkUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -35,19 +36,20 @@ class CommonRepo {
             // Check the Response
             response.let { res ->
                 if (res.isSuccessful) {
-                    Timber.d("GadgetsResponse: ${res.body()}")
+                    Timber.d("GadgetsResponse: ${res.body().toString()}")
                     gadgetsResponse.value = Resource.success(res.body())
                 } else {
                     gadgetsResponse.value = Resource.error(
                         commonResponse = CommonResponse(
                             responseCode = response.code().toString(),
-                            errorMessage = response.message(), data = ""
+                            errorMessage = response.message(),
+                            data = ""
                         )
                     )
                 }
             }
         } else {
-            //Todo: Add No Internet Toast Here
+            CommonUtils.showNoInternetToast(activity = activity)
             Timber.e("No Internet!!!")
         }
         return gadgetsResponse

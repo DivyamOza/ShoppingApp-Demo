@@ -10,6 +10,7 @@ import com.divyamoza.assesmentdemo.base.AssesmentDemoApp
 import com.divyamoza.assesmentdemo.base.BaseActivity
 import com.divyamoza.assesmentdemo.data.Status
 import com.divyamoza.assesmentdemo.databinding.ActivityHomeBinding
+import com.divyamoza.assesmentdemo.utils.CommonUtils
 import com.divyamoza.assesmentdemo.utils.NetworkUtils
 import com.divyamoza.assesmentdemo.utils.ProgressBarUtils
 import com.divyamoza.assesmentdemo.viewmodels.CommonViewModel
@@ -45,7 +46,7 @@ class HomeActivity : BaseActivity() {
             commonViewModel.getGadgetsInfo(activity = this)
         } else {
             Timber.e("getGadgets(): No Internet!!")
-            //ToDo: No Internet Dialog
+            CommonUtils.showNoInternetToast(activity = this)
         }
     }
 
@@ -60,8 +61,7 @@ class HomeActivity : BaseActivity() {
                 when (it?.status) {
                     Status.SUCCESS -> {
                         progressBar.dismissProgressBar()
-                        //ToDo: Show success msg
-                        Timber.d("Success!!!")
+                        Timber.d(CommonUtils.getString(name = R.string.lbl_success_status))
                         val gadgetsRecyclerAdapter =
                             commonViewModel.gadgetsResponse.value?.data?.products?.let { it1 ->
                                 GadgetsRecyclerAdapter(
@@ -72,20 +72,32 @@ class HomeActivity : BaseActivity() {
                         binding.rvGadgets.adapter = gadgetsRecyclerAdapter
                     }
                     Status.LOADING -> {
-                        Timber.e("Loading!!!")
+                        Timber.d(CommonUtils.getString(name = R.string.lbl_loading))
                     }
                     Status.ERROR -> {
-                        progressBar.dismissProgressBar()
-                        //ToDo: Show error msg
-                        Timber.e("Error!!!")
+                        errorOperations(errorMessage = it.commonResponse?.errorMessage)
                     }
                     else -> {
-                        progressBar.dismissProgressBar()
-                        Timber.e("Error!!!")
-                        //ToDo: Show error msg
+                        errorOperations(errorMessage = it.commonResponse?.errorMessage)
                     }
                 }
             }
+        )
+    }
+
+
+    /**
+     * Method used to do error operations
+     *
+     * @param errorMessage
+     */
+    private fun errorOperations(errorMessage: String?) {
+        Timber.d(CommonUtils.getString(name = R.string.lbl_error_status))
+        progressBar.dismissProgressBar()
+        CommonUtils.showErrorToast(
+            activity = this,
+            message = errorMessage
+                ?: CommonUtils.getString(name = R.string.lbl_something_went_wrong)
         )
     }
 }
