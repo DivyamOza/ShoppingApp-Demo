@@ -1,10 +1,13 @@
 package com.divyamoza.assesmentdemo.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.divyamoza.assesmentdemo.databinding.ItemGadgetsBinding
 import com.divyamoza.assesmentdemo.models.responses.Product
+import com.divyamoza.assesmentdemo.ui.activities.GadgetDetailActivity
+import com.divyamoza.assesmentdemo.utils.AppConstant
 import timber.log.Timber
 
 
@@ -46,6 +49,15 @@ class GadgetsRecyclerAdapter(private var gadgetsList: List<Product>) :
         init {
             itemGadgetsBinding.mainLayout.setOnClickListener {
                 Timber.d("OnClick: ${gadgetsList[adapterPosition]}")
+                val i =
+                    Intent(itemGadgetsBinding.mainLayout.context, GadgetDetailActivity::class.java)
+                val currentGadget = gadgetsList[adapterPosition]
+                i.putExtra(AppConstant.name, currentGadget.name)
+                i.putExtra(AppConstant.price, currentGadget.price)
+                i.putExtra(AppConstant.rating, currentGadget.rating.toString())
+                i.putExtra(AppConstant.image_url, currentGadget.image_url)
+                itemGadgetsBinding.mainLayout.context.startActivity(i)
+
             }
         }
     }

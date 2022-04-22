@@ -2,7 +2,7 @@
     <string name="app_name">Assesment Demo</string>
 
     <!-- Start 'item_gadgets.xml' file Strings -->
-    <string name="lbl_star_for_rating">"★"</string>
+    <string name="lbl_star_for_rating">" ★"</string>
     <string name="lbl_rupees">" ₹"</string>
     <!-- End 'item_gadgets.xml' file Strings -->
 
@@ -21,4 +21,10 @@
     <string name="lbl_loading_status">Loading</string>
     <string name="lbl_error_status">Error</string>
     <!-- End API Responses Status Strings -->
+
+    <!-- Start Gadget Details Strings -->
+    <string name="lbl_buy_now">BUY NOW</string>
+    <string name="lbl_add_to_cart">ADD TO CART</string>
+    <!-- End Gadget Details Strings -->
+
 </resources>

@@ -48,24 +48,26 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/_8sdp"
-                        android:fontFamily="@font/roboto_medium"
+                        android:fontFamily="@font/roboto_regular"
                         android:text="@{model.name}"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_11ssp"
-                        tools:text="RealMe XT" />
+                        android:textSize="@dimen/_12ssp"
+                        tools:text="RealMe XT (8 GB RAM + 128 GB ROM)" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_rate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/_5sdp"
-                        android:background="#32CD32"
-                        android:fontFamily="@font/roboto_light"
-                        android:paddingHorizontal="@dimen/_2sdp"
+                        android:background="@drawable/bg_green_rounded"
+                        android:fontFamily="@font/roboto_regular"
+                        android:paddingHorizontal="@dimen/_5sdp"
+                        android:paddingVertical="@dimen/_2sdp"
                         android:text="@{model.rating.toString().concat(@string/lbl_star_for_rating)}"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@android:color/white"
-                        tools:text="Rating" />
+                        android:textSize="@dimen/_9ssp"
+                        tools:text="5 ★" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -75,8 +77,9 @@
                         android:fontFamily="@font/roboto_bold"
                         android:text="@{model.price.toString().concat(@string/lbl_rupees)}"
                         android:textColor="@android:color/black"
+                        android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
-                        tools:text="20,000" />
+                        tools:text="25,000 ₹" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.appcompat.widget.LinearLayoutCompat>
