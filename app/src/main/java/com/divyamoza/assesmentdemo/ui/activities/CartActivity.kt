@@ -1,6 +1,8 @@
 package com.divyamoza.assesmentdemo.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -12,9 +14,12 @@ import com.divyamoza.assesmentdemo.base.BaseActivity
 import com.divyamoza.assesmentdemo.databinding.ActivityCartBinding
 import com.divyamoza.assesmentdemo.databinding.ItemActionBarBackstackBinding
 import com.divyamoza.assesmentdemo.listeners.BackNavigation
+import com.divyamoza.assesmentdemo.listeners.NavigateToOrderSuccess
 import com.divyamoza.assesmentdemo.models.dbentity.Gadget
 import com.divyamoza.assesmentdemo.models.dbentity.GadgetDatabase
+import com.divyamoza.assesmentdemo.utils.AppConstant
 import com.divyamoza.assesmentdemo.utils.CommonUtils
+import com.divyamoza.assesmentdemo.utils.ProgressBarUtils
 import com.divyamoza.assesmentdemo.viewmodels.CommonViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -24,12 +29,11 @@ import timber.log.Timber
  *
  * @constructor Create empty Cart activity
  */
-class CartActivity : BaseActivity(), BackNavigation {
+class CartActivity : BaseActivity(), BackNavigation, NavigateToOrderSuccess {
     lateinit var binding: ActivityCartBinding
     lateinit var bindingItemActionBarBackstackBinding: ItemActionBarBackstackBinding
     private lateinit var commonViewModel: CommonViewModel
-
-    //    private val progressBar: ProgressBarUtils = ProgressBarUtils
+    private val progressBar: ProgressBarUtils = ProgressBarUtils
     lateinit var database: GadgetDatabase
     var gadgetListFromDB: MutableList<Gadget?>? = mutableListOf()
 
@@ -44,6 +48,7 @@ class CartActivity : BaseActivity(), BackNavigation {
         commonViewModel = ViewModelProvider(this)[CommonViewModel::class.java]
         database = GadgetDatabase.getDatabase(context = this)
 //        progressBar.showProgressBar(ctx = this)
+        setListeners()
         setDataToAppBar()
         setObserver()
         getDataFromDataBase()
@@ -133,7 +138,6 @@ class CartActivity : BaseActivity(), BackNavigation {
      *
      */
     private fun setDataToAppBar() {
-        binding.listener = this
         binding.title = CommonUtils.getString(name = R.string.lbl_my_cart)
     }
 
@@ -144,5 +148,29 @@ class CartActivity : BaseActivity(), BackNavigation {
      */
     override fun navigateToBackStack() {
         onBackPressed()
+    }
+
+
+    /**
+     * Navigate to order success screen
+     *
+     */
+    override fun navigateToOrderSuccessScreen() {
+        progressBar.showProgressBar(ctx = this)
+        Handler().postDelayed({
+            progressBar.dismissProgressBar()
+            val i = Intent(this, OrderSuccessActivity::class.java)
+            startActivity(i)
+        }, AppConstant.DELAY_TO_PLACE_ORDER)
+    }
+
+
+    /**
+     * Set listeners
+     *
+     */
+    private fun setListeners() {
+        binding.listener = this
+        binding.listenerForPlaceOrder = this
     }
 }

@@ -16,4 +16,7 @@ object AppConstant {
 
     // For Cart RecyclerView Adapter
     const val QTY_SPLITTER = ":"
+
+    // Delay for Place Orders
+    const val DELAY_TO_PLACE_ORDER: Long = 30000
 }

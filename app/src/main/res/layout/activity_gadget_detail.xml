@@ -9,6 +9,15 @@
         <variable
             name="model"
             type="com.divyamoza.assesmentdemo.models.responses.Product" />
+
+
+        <variable
+            name="listenerForBuyNow"
+            type="com.divyamoza.assesmentdemo.listeners.NavigateToOrderSuccess" />
+
+        <variable
+            name="listenerForAddToCart"
+            type="com.divyamoza.assesmentdemo.listeners.AddToCartOperation" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -96,6 +105,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/bg_white_rounded_left"
                 android:fontFamily="@font/roboto_bold"
+                android:onClick="@{() -> listenerForAddToCart.performAddToCartOperation()}"
                 android:text="@string/lbl_add_to_cart"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp" />
@@ -108,6 +118,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/bg_orange_rounded_right"
                 android:fontFamily="@font/roboto_bold"
+                android:onClick="@{() -> listenerForBuyNow.navigateToOrderSuccessScreen()}"
                 android:text="@string/lbl_buy_now"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12ssp" />

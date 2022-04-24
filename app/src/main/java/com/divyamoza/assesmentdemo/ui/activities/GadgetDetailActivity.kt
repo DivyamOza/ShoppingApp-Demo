@@ -2,18 +2,21 @@ package com.divyamoza.assesmentdemo.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.os.Handler
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.divyamoza.assesmentdemo.R
 import com.divyamoza.assesmentdemo.base.BaseActivity
 import com.divyamoza.assesmentdemo.databinding.ActivityGadgetDetailBinding
+import com.divyamoza.assesmentdemo.listeners.AddToCartOperation
+import com.divyamoza.assesmentdemo.listeners.NavigateToOrderSuccess
 import com.divyamoza.assesmentdemo.models.dbentity.Gadget
 import com.divyamoza.assesmentdemo.models.dbentity.GadgetDatabase
 import com.divyamoza.assesmentdemo.models.responses.Product
 import com.divyamoza.assesmentdemo.ui.fragments.SuccessDialogWithAnimation
 import com.divyamoza.assesmentdemo.utils.AppConstant
 import com.divyamoza.assesmentdemo.utils.CommonUtils
+import com.divyamoza.assesmentdemo.utils.ProgressBarUtils
 import com.divyamoza.assesmentdemo.viewmodels.CommonViewModel
 import timber.log.Timber
 
@@ -22,7 +25,8 @@ import timber.log.Timber
  *
  * @constructor Create empty Gadget detail activity
  */
-class GadgetDetailActivity : BaseActivity(), View.OnClickListener {
+class GadgetDetailActivity : BaseActivity(), NavigateToOrderSuccess,
+    AddToCartOperation {
     lateinit var binding: ActivityGadgetDetailBinding
     lateinit var database: GadgetDatabase
     private var gadgetName: String? = ""
@@ -30,6 +34,7 @@ class GadgetDetailActivity : BaseActivity(), View.OnClickListener {
     private var gadgetRating: String? = ""
     private var gadgetImageURL: String? = ""
     private lateinit var commonViewModel: CommonViewModel
+    private val progressBar: ProgressBarUtils = ProgressBarUtils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,51 +87,13 @@ class GadgetDetailActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-
-    /**
-     * On click
-     *
-     * @param v
-     */
-    override fun onClick(v: View?) {
-        when (v) {
-            // 'Add to Cart' Btn Click Event
-            binding.btnAddToCart -> {
-                if (binding.btnAddToCart.text.toString().trim()
-                        .lowercase() == CommonUtils.getString(name = R.string.lbl_go_to_cart)
-                        ?.trim()?.lowercase()
-                ) {
-                    val i = Intent(this, CartActivity::class.java)
-                    startActivity(i)
-                } else {
-                    val gadgetObjectForDB =
-                        Gadget(
-                            name = gadgetName ?: "",
-                            price = gadgetPrice ?: "",
-                            rating = gadgetRating.toString().toInt(),
-                            image_url = gadgetImageURL ?: "",
-                            id = 0
-                        )
-                    commonViewModel.addGadgetIntoDB(gadget = gadgetObjectForDB)
-                    showSuccessDialog(isForAddToCart = true)
-                }
-            }
-
-            // 'Buy Now' Btn Click Event
-            binding.btnBuy -> {
-                showSuccessDialog(isForAddToCart = false)
-            }
-        }
-    }
-
-
     /**
      * Set listeners
      *
      */
     private fun setListeners() {
-        binding.btnAddToCart.setOnClickListener(this)
-        binding.btnBuy.setOnClickListener(this)
+        binding.listenerForAddToCart = this
+        binding.listenerForBuyNow = this
     }
 
 
@@ -160,6 +127,45 @@ class GadgetDetailActivity : BaseActivity(), View.OnClickListener {
             } else {
                 binding.btnAddToCart.text = CommonUtils.getString(name = R.string.lbl_add_to_cart)
             }
+        }
+    }
+
+    /**
+     * Navigate to order success screen
+     *
+     */
+    override fun navigateToOrderSuccessScreen() {
+        progressBar.showProgressBar(ctx = this)
+        Handler().postDelayed({
+            progressBar.dismissProgressBar()
+            val i = Intent(this, OrderSuccessActivity::class.java)
+            startActivity(i)
+        }, AppConstant.DELAY_TO_PLACE_ORDER)
+    }
+
+
+    /**
+     * Perform add to cart operations
+     *
+     */
+    override fun performAddToCartOperation() {
+        if (binding.btnAddToCart.text.toString().trim()
+                .lowercase() == CommonUtils.getString(name = R.string.lbl_go_to_cart)
+                ?.trim()?.lowercase()
+        ) {
+            val i = Intent(this, CartActivity::class.java)
+            startActivity(i)
+        } else {
+            val gadgetObjectForDB =
+                Gadget(
+                    name = gadgetName ?: "",
+                    price = gadgetPrice ?: "",
+                    rating = gadgetRating.toString().toInt(),
+                    image_url = gadgetImageURL ?: "",
+                    id = 0
+                )
+            commonViewModel.addGadgetIntoDB(gadget = gadgetObjectForDB)
+            showSuccessDialog(isForAddToCart = true)
         }
     }
 }

@@ -17,6 +17,10 @@
         <variable
             name="listener"
             type="com.divyamoza.assesmentdemo.listeners.BackNavigation" />
+
+        <variable
+            name="listenerForPlaceOrder"
+            type="com.divyamoza.assesmentdemo.listeners.NavigateToOrderSuccess" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -149,6 +153,7 @@
                 android:layout_height="@dimen/_35sdp"
                 android:background="@drawable/bg_orange_rounded"
                 android:fontFamily="@font/roboto_bold"
+                android:onClick="@{() -> listenerForPlaceOrder.navigateToOrderSuccessScreen()}"
                 android:paddingHorizontal="@dimen/_5sdp"
                 android:text="@string/lbl_place_order"
                 android:textAllCaps="false"

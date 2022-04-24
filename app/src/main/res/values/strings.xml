@@ -49,5 +49,9 @@
 
     <!-- Start Success Dialog with Animation String -->
     <string name="lbl_item_add_to_cart">Item added to Cart</string>
+    <string name="lbl_continue_shopping">Continue Shopping</string>
+    <string name="lbl_order_placed">Your order has been placed</string>
+    <string name="lbl_congratulation">Congratulations</string>
+    <string name="lbl_order_id">Your Order ID is 201707255362678</string>
     <!-- End Success Dialog with Animation String -->
 </resources>
