@@ -15,7 +15,6 @@ import com.divyamoza.assesmentdemo.listeners.BackNavigation
 import com.divyamoza.assesmentdemo.models.dbentity.Gadget
 import com.divyamoza.assesmentdemo.models.dbentity.GadgetDatabase
 import com.divyamoza.assesmentdemo.utils.CommonUtils
-import com.divyamoza.assesmentdemo.utils.ProgressBarUtils
 import com.divyamoza.assesmentdemo.viewmodels.CommonViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -29,7 +28,8 @@ class CartActivity : BaseActivity(), BackNavigation {
     lateinit var binding: ActivityCartBinding
     lateinit var bindingItemActionBarBackstackBinding: ItemActionBarBackstackBinding
     private lateinit var commonViewModel: CommonViewModel
-    private val progressBar: ProgressBarUtils = ProgressBarUtils
+
+    //    private val progressBar: ProgressBarUtils = ProgressBarUtils
     lateinit var database: GadgetDatabase
     var gadgetListFromDB: MutableList<Gadget?>? = mutableListOf()
 
@@ -43,7 +43,7 @@ class CartActivity : BaseActivity(), BackNavigation {
         bindingItemActionBarBackstackBinding.lifecycleOwner = this
         commonViewModel = ViewModelProvider(this)[CommonViewModel::class.java]
         database = GadgetDatabase.getDatabase(context = this)
-        progressBar.showProgressBar(ctx = this)
+//        progressBar.showProgressBar(ctx = this)
         setDataToAppBar()
         setObserver()
         getDataFromDataBase()
@@ -58,12 +58,12 @@ class CartActivity : BaseActivity(), BackNavigation {
             //Timber.d("AllGadgetsCount: $it")
             Timber.d("@@> ${it.isNotEmpty()}")
             if (it.isNotEmpty()) {
-                progressBar.dismissProgressBar()
+//                progressBar.dismissProgressBar()
                 gadgetListFromDB?.clear()
                 gadgetListFromDB?.addAll(it)
             } else {
                 gadgetListFromDB?.clear()
-                progressBar.dismissProgressBar()
+//                progressBar.dismissProgressBar()
             }
             setDataToRecyclerView()
         }
