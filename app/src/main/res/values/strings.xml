@@ -27,4 +27,21 @@
     <string name="lbl_add_to_cart">ADD TO CART</string>
     <!-- End Gadget Details Strings -->
 
+
+    <!-- Start item cart Strings -->
+    <array name="quantity">
+        <item>Qty:1</item>
+        <item>Qty:2</item>
+        <item>Qty:3</item>
+        <item>Qty:4</item>
+        <item>Qty:5</item>
+    </array>
+
+    <string name="lbl_remove">Remove</string>
+    <!-- End item cart Strings -->
+
+    <!-- Start Cart Activity Strings -->
+    <string name="lbl_view_price_detail">View Price Details</string>
+    <string name="lbl_place_order">Place Order</string>
+    <!-- End Cart Activity Strings -->
 </resources>
