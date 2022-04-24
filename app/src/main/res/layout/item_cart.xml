@@ -15,6 +15,11 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_150sdp"
         android:layout_margin="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_7sdp"
+        android:background="@drawable/bg_white_rectangular_ripple_anim"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:orientation="vertical"
         app:cardCornerRadius="@dimen/_5sdp">
 

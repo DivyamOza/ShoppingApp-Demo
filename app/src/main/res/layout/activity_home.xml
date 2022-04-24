@@ -22,6 +22,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/light_gray"
         tools:context=".ui.activities.HomeActivity">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -45,8 +46,8 @@
             android:id="@+id/rvGadgets"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:paddingTop="@dimen/_5sdp"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:layout_marginVertical="@dimen/_8sdp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
