@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -8,6 +9,14 @@
         <variable
             name="commonViewModel"
             type="com.divyamoza.assesmentdemo.viewmodels.CommonViewModel" />
+
+        <variable
+            name="gadgetsCount"
+            type="int" />
+
+        <variable
+            name="listener"
+            type="com.divyamoza.assesmentdemo.listeners.NavigateToCart" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +33,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <include layout="@layout/item_actionbar" />
+            <include
+                android:id="@+id/actionBar"
+                layout="@layout/item_actionbar"
+                bind:gadgetsCount="@{gadgetsCount}"
+                bind:listener="@{listener}" />
 
         </com.google.android.material.appbar.AppBarLayout>
 

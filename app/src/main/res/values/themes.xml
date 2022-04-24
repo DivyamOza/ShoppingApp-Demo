@@ -31,5 +31,26 @@
     </style>
     <!-- End Spinner Theme for Item Cart -->
 
+    <!-- Start Spinner Theme for Item Cart -->
+    <style name="CartActivityTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="toolbarStyle">@style/MyToolBarStyle</item>
+    </style>
 
+    <style name="MyToolBarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="titleTextAppearance">@style/MyTitleTextAppearance</item>
+        <item name="subtitleTextAppearance">@style/MySubTitleTextAppearance</item>
+    </style>
+
+    <style name="MyTitleTextAppearance" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">35dp</item>
+        <item name="android:textColor">#ff3d00</item>
+    </style>
+
+    <style name="MySubTitleTextAppearance" parent="TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textSize">30dp</item>
+        <item name="android:textColor">#1976d2</item>
+    </style>
 </resources>

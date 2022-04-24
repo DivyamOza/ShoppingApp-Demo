@@ -16,7 +16,9 @@
         android:theme="@style/Theme.AssesmentDemo">
         <activity
             android:name=".ui.activities.CartActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ui.activities.HomeActivity"
+            android:theme="@style/CartActivityTheme" />
         <activity
             android:name=".ui.activities.GadgetDetailActivity"
             android:exported="false" />
@@ -34,7 +36,8 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

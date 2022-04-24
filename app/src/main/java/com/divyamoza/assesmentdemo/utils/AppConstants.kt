@@ -13,4 +13,7 @@ object AppConstant {
     // DataBase Constants
     const val DB_NAME = "assessment_db"
     const val DB_TABLE_NAME = "gadgets_cart"
+
+    // For Cart RecyclerView Adapter
+    const val QTY_SPLITTER = ":"
 }

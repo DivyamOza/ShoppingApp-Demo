@@ -1,5 +1,6 @@
 package com.divyamoza.assesmentdemo.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -10,6 +11,9 @@ import com.divyamoza.assesmentdemo.base.AssesmentDemoApp
 import com.divyamoza.assesmentdemo.base.BaseActivity
 import com.divyamoza.assesmentdemo.data.Status
 import com.divyamoza.assesmentdemo.databinding.ActivityHomeBinding
+import com.divyamoza.assesmentdemo.databinding.ItemActionbarBinding
+import com.divyamoza.assesmentdemo.listeners.NavigateToCart
+import com.divyamoza.assesmentdemo.models.dbentity.GadgetDatabase
 import com.divyamoza.assesmentdemo.utils.CommonUtils
 import com.divyamoza.assesmentdemo.utils.NetworkUtils
 import com.divyamoza.assesmentdemo.utils.ProgressBarUtils
@@ -22,18 +26,24 @@ import timber.log.Timber
  *
  * @constructor Create empty Home activity
  */
-class HomeActivity : BaseActivity() {
-    lateinit var binding: ActivityHomeBinding
+class HomeActivity : BaseActivity(), NavigateToCart {
     private lateinit var commonViewModel: CommonViewModel
+    lateinit var bindingItemActionBar: ItemActionbarBinding
+    lateinit var binding: ActivityHomeBinding
     private val progressBar: ProgressBarUtils = ProgressBarUtils
+    lateinit var database: GadgetDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        bindingItemActionBar = DataBindingUtil.setContentView(this, R.layout.item_actionbar)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
         commonViewModel = ViewModelProvider(this)[CommonViewModel::class.java]
         binding.lifecycleOwner = this
-        setObserver()
+        bindingItemActionBar.lifecycleOwner = this
+        database = GadgetDatabase.getDatabase(context = this)
         apiCallForGadgets()
+        setObserver()
+        binding.listener = this
     }
 
     /**
@@ -83,6 +93,20 @@ class HomeActivity : BaseActivity() {
                 }
             }
         )
+
+        commonViewModel.gadgetsCountResponse.observe(this) {
+            Timber.d("@@> countsFromDB: ${it}")
+        }
+
+        database.gadgetDao().getGadgetsCount()?.observe(this) {
+            Timber.d("AllGadgetsCount: $it")
+            if (it.toString().isNotBlank()) {
+                binding.actionBar.gadgetsCount = it ?: 0
+            } else {
+                binding.actionBar.gadgetsCount = 0
+            }
+
+        }
     }
 
 
@@ -99,5 +123,15 @@ class HomeActivity : BaseActivity() {
             message = errorMessage
                 ?: CommonUtils.getString(name = R.string.lbl_something_went_wrong)
         )
+    }
+
+
+    /**
+     * Navigate to cart screen
+     *
+     */
+    override fun navigateToCartScreen() {
+        val i = Intent(this, CartActivity::class.java)
+        startActivity(i)
     }
 }

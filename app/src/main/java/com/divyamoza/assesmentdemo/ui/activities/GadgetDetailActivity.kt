@@ -1,6 +1,8 @@
 package com.divyamoza.assesmentdemo.ui.activities
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.divyamoza.assesmentdemo.R
 import com.divyamoza.assesmentdemo.base.BaseActivity
@@ -14,7 +16,7 @@ import timber.log.Timber
  *
  * @constructor Create empty Gadget detail activity
  */
-class GadgetDetailActivity : BaseActivity() {
+class GadgetDetailActivity : BaseActivity(), View.OnClickListener {
     private lateinit var binding: ActivityGadgetDetailBinding
     private var gadgetName: String? = ""
     private var gadgetPrice: String? = ""
@@ -25,6 +27,7 @@ class GadgetDetailActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_gadget_detail)
         binding.lifecycleOwner = this
+        setListeners()
         getGadgetDetails()
         setGadgetDetails()
     }
@@ -67,5 +70,32 @@ class GadgetDetailActivity : BaseActivity() {
         if (intent.hasExtra(AppConstant.name)) {
             gadgetImageURL = intent.getStringExtra(AppConstant.image_url.trim()) ?: ""
         }
+    }
+
+
+    /**
+     * On click
+     *
+     * @param v
+     */
+    override fun onClick(v: View?) {
+        when (v) {
+            binding.btnAddToCart -> {
+                Toast.makeText(this, "Add To Cart", Toast.LENGTH_SHORT).show()
+            }
+            binding.btnBuy -> {
+                Toast.makeText(this, "BUY", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+
+    /**
+     * Set listeners
+     *
+     */
+    private fun setListeners() {
+        binding.btnAddToCart.setOnClickListener(this)
+        binding.btnBuy.setOnClickListener(this)
     }
 }
