@@ -18,6 +18,12 @@ object ApiClient {
         getRetrofit().create(ApiService::class.java)
     }
 
+
+    /**
+     * Get retrofit
+     *
+     * @return
+     */
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(ApiConstants.BASE_URL)
@@ -28,6 +34,11 @@ object ApiClient {
     }
 
 
+    /**
+     * Get ok http client
+     *
+     * @return
+     */
     private fun getOkHttpClient(): OkHttpClient {
         val loggingInterceptor = LoggingInterceptor.Builder()
             //.loggable(BuildConfig.DEBUG)
@@ -53,6 +64,11 @@ object ApiClient {
     }
 
 
+    /**
+     * Get header interceptor
+     *
+     * @return
+     */
     private fun getHeaderInterceptor(): Interceptor {
         return Interceptor { chain ->
             val request =
@@ -64,6 +80,11 @@ object ApiClient {
     }
 
 
+    /**
+     * API cookie jar
+     *
+     * @constructor Create empty A p i cookie jar
+     */
     private class APICookieJar : CookieJar {
 
         private val cookies = mutableListOf<Cookie>()

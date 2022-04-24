@@ -20,7 +20,7 @@ object CommonUtils {
      * @param name
      * @return
      */
-    fun getString(ctx: Context = AssesmentDemoApp.context, name: Int?): String? {
+    fun getString(ctx: Context = AssesmentDemoApp.context, name: Int?): String {
         return if (name != null) {
             ctx.getString(name)
         } else ""
@@ -50,7 +50,7 @@ object CommonUtils {
     fun showSuccessToast(activity: Activity, message: String?) {
         showToast(
             activity,
-            title = getString(name = R.string.lbl_success_status) ?: "Success",
+            title = getString(name = R.string.lbl_success_status),
             message = message ?: "",
             type = ToastType.SUCCESS
         )
@@ -66,7 +66,7 @@ object CommonUtils {
     fun showErrorToast(activity: Activity, message: String?) {
         showToast(
             activity = activity,
-            title = getString(name = R.string.lbl_error_status) ?: "Error",
+            title = getString(name = R.string.lbl_error_status),
             message = message ?: "",
             type = ToastType.ERROR
         )
@@ -82,12 +82,12 @@ object CommonUtils {
      * @param type
      */
     private fun showToast(activity: Activity, title: String?, message: String?, type: ToastType) {
-        val toastType: MotionToastStyle? = getToastType(type)
+        val toastType: MotionToastStyle = getToastType(type)
         MotionToast.darkColorToast(
             context = activity,
             title = title ?: "",
             message = message ?: "",
-            style = toastType ?: MotionToastStyle.INFO,
+            style = toastType,
             position = MotionToast.GRAVITY_BOTTOM,
             duration = MotionToast.SHORT_DURATION,
             font = ResourcesCompat.getFont(activity, R.font.roboto_regular)

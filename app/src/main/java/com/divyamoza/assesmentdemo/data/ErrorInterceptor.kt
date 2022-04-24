@@ -59,9 +59,6 @@ class ErrorInterceptor : Interceptor {
                 }
             }
 
-            val jsonObject = JsonObject()
-            //jsonObject.add("ResponseCode",)
-
             return Response.Builder()
                 .request(request)
                 .protocol(Protocol.HTTP_1_1)

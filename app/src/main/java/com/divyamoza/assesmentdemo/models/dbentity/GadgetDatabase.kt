@@ -12,7 +12,7 @@ import com.divyamoza.assesmentdemo.utils.AppConstant
  *
  * @constructor Create empty Gadget database
  */
-@Database(entities = [Gadget::class], version = 1)
+@Database(entities = [Gadget::class], version = 1, exportSchema = false)
 abstract class GadgetDatabase : RoomDatabase() {
 
     /**

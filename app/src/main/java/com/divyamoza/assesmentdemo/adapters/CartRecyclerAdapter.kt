@@ -90,11 +90,11 @@ class CartRecyclerAdapter(
         init {
             itemCartBinding.llRemove.setOnClickListener {
                 val gadgetObject = Gadget(
-                    image_url = itemCartBinding?.model?.image_url ?: "",
-                    name = itemCartBinding?.model?.name ?: "",
-                    price = itemCartBinding?.model?.price ?: "",
-                    rating = itemCartBinding?.model?.rating ?: 0,
-                    id = itemCartBinding?.model?.id ?: 0
+                    image_url = itemCartBinding.model?.image_url ?: "",
+                    name = itemCartBinding.model?.name ?: "",
+                    price = itemCartBinding.model?.price ?: "",
+                    rating = itemCartBinding.model?.rating ?: 0,
+                    id = itemCartBinding.model?.id ?: 0
                 )
                 commonViewModel.deleteGadgetFromDB(gadgetObject)
             }

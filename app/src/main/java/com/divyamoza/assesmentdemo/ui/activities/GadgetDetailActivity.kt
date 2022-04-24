@@ -151,7 +151,7 @@ class GadgetDetailActivity : BaseActivity(), NavigateToOrderSuccess,
     override fun performAddToCartOperation() {
         if (binding.btnAddToCart.text.toString().trim()
                 .lowercase() == CommonUtils.getString(name = R.string.lbl_go_to_cart)
-                ?.trim()?.lowercase()
+                .trim().lowercase()
         ) {
             val i = Intent(this, CartActivity::class.java)
             startActivity(i)

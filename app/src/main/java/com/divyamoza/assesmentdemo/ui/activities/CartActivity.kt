@@ -92,10 +92,10 @@ class CartActivity : BaseActivity(), BackNavigation, NavigateToOrderSuccess {
             }
             var totalPrice = 0
             gadgetListFromDB?.toList()?.forEach { it ->
-                totalPrice = totalPrice + it?.price.toString().toInt() ?: 0
+                totalPrice += it?.price.toString().toInt()
             }
 
-            binding.totalPrice = totalPrice.toString() ?: ""
+            binding.totalPrice = totalPrice.toString()
         }
 
     }
