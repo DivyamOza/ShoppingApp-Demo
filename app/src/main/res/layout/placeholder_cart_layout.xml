@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5sdp">
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/spinQty"
+        app:layout_constraintEnd_toStartOf="@+id/imgGadget"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtGadgetName"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:background="@color/grey_shimmer_layout"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_medium"
+            android:maxLines="2"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintEnd_toStartOf="@+id/imgGadget"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@color/grey_shimmer_layout"
+            android:fontFamily="@font/roboto_regular"
+            android:paddingHorizontal="@dimen/_12sdp"
+            android:paddingVertical="@dimen/_2sdp"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_9ssp"
+            app:layout_constraintStart_toStartOf="@+id/txtGadgetName"
+            app:layout_constraintTop_toBottomOf="@+id/txtGadgetName" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtPrice"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@color/grey_shimmer_layout"
+            android:fontFamily="@font/roboto_bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintStart_toStartOf="@+id/txtRating"
+            app:layout_constraintTop_toBottomOf="@+id/txtRating" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgGadget"
+        android:layout_width="@dimen/_85sdp"
+        android:layout_height="@dimen/_85sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@color/grey_shimmer_layout"
+        android:fitsSystemWindows="true"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinQty"
+        style="@style/SpinnerTheme"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@color/grey_shimmer_layout"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@+id/imgGadget"
+        app:layout_constraintStart_toStartOf="@+id/imgGadget"
+        app:layout_constraintTop_toBottomOf="@+id/imgGadget" />
+
+    <View
+        android:id="@+id/lineViewHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="#cccccc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinQty" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llRemove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lineViewHorizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgRemove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_baseline_delete_24"
+            app:tint="@android:color/darker_gray" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtRemove"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:background="@color/grey_shimmer_layout"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="@dimen/_13ssp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

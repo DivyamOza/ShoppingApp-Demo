@@ -12,4 +12,5 @@
     <color name="green_for_rating">#008e00</color>
     <color name="light_gray">#1234</color>
     <color name="black_transparent">#CE171717</color>
+    <color name="grey_shimmer_layout">@android:color/darker_gray</color>
 </resources>

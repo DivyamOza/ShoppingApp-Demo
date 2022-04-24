@@ -2,10 +2,12 @@ package com.divyamoza.assesmentdemo.utils
 
 import android.app.Activity
 import android.content.Context
+import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.divyamoza.assesmentdemo.R
 import com.divyamoza.assesmentdemo.base.AssesmentDemoApp
 import com.divyamoza.assesmentdemo.enums.ToastType
+import com.facebook.shimmer.ShimmerFrameLayout
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
 
@@ -120,5 +122,27 @@ object CommonUtils {
                 return MotionToastStyle.INFO
             }
         }
+    }
+
+
+    /**
+     * Start shimmer animation
+     *
+     * @param layout
+     */
+    fun startShimmerAnimation(layout: ShimmerFrameLayout) {
+        layout.visibility = View.VISIBLE
+        layout.startShimmerAnimation()
+    }
+
+
+    /**
+     * Stop shimmer animation
+     *
+     * @param layout
+     */
+    fun stopShimmerAnimation(layout: ShimmerFrameLayout) {
+        layout.stopShimmerAnimation()
+        layout.visibility = View.GONE
     }
 }

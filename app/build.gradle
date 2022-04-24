@@ -101,4 +101,7 @@ dependencies {
 
     // Test helpers
     testImplementation("androidx.room:room-testing:$roomVersion")
+
+    // Shimmer Animation: Lib. for Animation while Loading Data
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
 }

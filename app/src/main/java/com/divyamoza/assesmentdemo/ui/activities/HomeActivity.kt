@@ -16,7 +16,6 @@ import com.divyamoza.assesmentdemo.listeners.NavigateToCart
 import com.divyamoza.assesmentdemo.models.dbentity.GadgetDatabase
 import com.divyamoza.assesmentdemo.utils.CommonUtils
 import com.divyamoza.assesmentdemo.utils.NetworkUtils
-import com.divyamoza.assesmentdemo.utils.ProgressBarUtils
 import com.divyamoza.assesmentdemo.viewmodels.CommonViewModel
 import timber.log.Timber
 
@@ -30,7 +29,6 @@ class HomeActivity : BaseActivity(), NavigateToCart {
     private lateinit var commonViewModel: CommonViewModel
     lateinit var bindingItemActionBar: ItemActionbarBinding
     lateinit var binding: ActivityHomeBinding
-    private val progressBar: ProgressBarUtils = ProgressBarUtils
     lateinit var database: GadgetDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +50,7 @@ class HomeActivity : BaseActivity(), NavigateToCart {
      */
     private fun apiCallForGadgets() {
         if (NetworkUtils.isNetworkAvailable(context = AssesmentDemoApp.context)) {
-            progressBar.showProgressBar(ctx = this)
+            CommonUtils.startShimmerAnimation(layout = binding.shimmerViewContainer)
             commonViewModel.getGadgetsInfo(activity = this)
         } else {
             Timber.e("getGadgets(): No Internet!!")
@@ -70,7 +68,7 @@ class HomeActivity : BaseActivity(), NavigateToCart {
             this, androidx.lifecycle.Observer {
                 when (it?.status) {
                     Status.SUCCESS -> {
-                        progressBar.dismissProgressBar()
+                        CommonUtils.stopShimmerAnimation(layout = binding.shimmerViewContainer)
                         Timber.d(CommonUtils.getString(name = R.string.lbl_success_status))
                         val gadgetsRecyclerAdapter =
                             commonViewModel.gadgetsResponse.value?.data?.products?.let { it1 ->
@@ -117,7 +115,7 @@ class HomeActivity : BaseActivity(), NavigateToCart {
      */
     private fun errorOperations(errorMessage: String?) {
         Timber.d(CommonUtils.getString(name = R.string.lbl_error_status))
-        progressBar.dismissProgressBar()
+        CommonUtils.stopShimmerAnimation(layout = binding.shimmerViewContainer)
         CommonUtils.showErrorToast(
             activity = this,
             message = errorMessage
