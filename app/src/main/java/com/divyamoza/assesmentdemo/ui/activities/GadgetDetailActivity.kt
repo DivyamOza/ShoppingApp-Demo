@@ -1,5 +1,6 @@
 package com.divyamoza.assesmentdemo.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
@@ -12,6 +13,7 @@ import com.divyamoza.assesmentdemo.models.dbentity.GadgetDatabase
 import com.divyamoza.assesmentdemo.models.responses.Product
 import com.divyamoza.assesmentdemo.ui.fragments.SuccessDialogWithAnimation
 import com.divyamoza.assesmentdemo.utils.AppConstant
+import com.divyamoza.assesmentdemo.utils.CommonUtils
 import com.divyamoza.assesmentdemo.viewmodels.CommonViewModel
 import timber.log.Timber
 
@@ -36,10 +38,10 @@ class GadgetDetailActivity : BaseActivity(), View.OnClickListener {
         database = GadgetDatabase.getDatabase(context = this)
         commonViewModel = ViewModelProvider(this)[CommonViewModel::class.java]
         setListeners()
+        setObserver()
         getGadgetDetails()
         setGadgetDetails()
     }
-
 
     /**
      * Set gadget details
@@ -90,16 +92,24 @@ class GadgetDetailActivity : BaseActivity(), View.OnClickListener {
         when (v) {
             // 'Add to Cart' Btn Click Event
             binding.btnAddToCart -> {
-                val gadgetObjectForDB =
-                    Gadget(
-                        name = gadgetName ?: "",
-                        price = gadgetPrice ?: "",
-                        rating = gadgetRating.toString().toInt(),
-                        image_url = gadgetImageURL ?: "",
-                        id = 0
-                    )
-                commonViewModel.addGadgetIntoDB(gadget = gadgetObjectForDB)
-                showSuccessDialog(isForAddToCart = true)
+                if (binding.btnAddToCart.text.toString().trim()
+                        .lowercase() == CommonUtils.getString(name = R.string.lbl_go_to_cart)
+                        ?.trim()?.lowercase()
+                ) {
+                    val i = Intent(this, CartActivity::class.java)
+                    startActivity(i)
+                } else {
+                    val gadgetObjectForDB =
+                        Gadget(
+                            name = gadgetName ?: "",
+                            price = gadgetPrice ?: "",
+                            rating = gadgetRating.toString().toInt(),
+                            image_url = gadgetImageURL ?: "",
+                            id = 0
+                        )
+                    commonViewModel.addGadgetIntoDB(gadget = gadgetObjectForDB)
+                    showSuccessDialog(isForAddToCart = true)
+                }
             }
 
             // 'Buy Now' Btn Click Event
@@ -129,5 +139,27 @@ class GadgetDetailActivity : BaseActivity(), View.OnClickListener {
         val successDialogWithAnimation =
             SuccessDialogWithAnimation(isForAddToCart = isForAddToCart)
         successDialogWithAnimation.show(supportFragmentManager, "customDialog")
+    }
+
+
+    /**
+     * Set observer
+     *
+     */
+    private fun setObserver() {
+        database.gadgetDao().getAllGadgets()?.observe(this) {
+            //Timber.d("AllGadgetsCount: $it")
+            Timber.d("@@> ${it.isNotEmpty()}")
+            if (it.isNotEmpty()) {
+                it.forEach { gadget ->
+                    if (gadget?.name.equals(gadgetName, true)) {
+                        binding.btnAddToCart.text =
+                            CommonUtils.getString(name = R.string.lbl_go_to_cart)
+                    }
+                }
+            } else {
+                binding.btnAddToCart.text = CommonUtils.getString(name = R.string.lbl_add_to_cart)
+            }
+        }
     }
 }

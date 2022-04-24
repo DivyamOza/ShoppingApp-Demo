@@ -16,9 +16,7 @@
         android:theme="@style/Theme.AssesmentDemo">
         <activity
             android:name=".ui.activities.CartActivity"
-            android:exported="false"
-            android:parentActivityName=".ui.activities.HomeActivity"
-            android:theme="@style/CartActivityTheme" />
+            android:exported="false" />
         <activity
             android:name=".ui.activities.GadgetDetailActivity"
             android:exported="false" />

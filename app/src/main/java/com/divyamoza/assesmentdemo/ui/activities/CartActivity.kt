@@ -10,8 +10,11 @@ import com.divyamoza.assesmentdemo.R
 import com.divyamoza.assesmentdemo.adapters.CartRecyclerAdapter
 import com.divyamoza.assesmentdemo.base.BaseActivity
 import com.divyamoza.assesmentdemo.databinding.ActivityCartBinding
+import com.divyamoza.assesmentdemo.databinding.ItemActionBarBackstackBinding
+import com.divyamoza.assesmentdemo.listeners.BackNavigation
 import com.divyamoza.assesmentdemo.models.dbentity.Gadget
 import com.divyamoza.assesmentdemo.models.dbentity.GadgetDatabase
+import com.divyamoza.assesmentdemo.utils.CommonUtils
 import com.divyamoza.assesmentdemo.utils.ProgressBarUtils
 import com.divyamoza.assesmentdemo.viewmodels.CommonViewModel
 import kotlinx.coroutines.launch
@@ -22,8 +25,9 @@ import timber.log.Timber
  *
  * @constructor Create empty Cart activity
  */
-class CartActivity : BaseActivity() {
+class CartActivity : BaseActivity(), BackNavigation {
     lateinit var binding: ActivityCartBinding
+    lateinit var bindingItemActionBarBackstackBinding: ItemActionBarBackstackBinding
     private lateinit var commonViewModel: CommonViewModel
     private val progressBar: ProgressBarUtils = ProgressBarUtils
     lateinit var database: GadgetDatabase
@@ -32,13 +36,16 @@ class CartActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
+        bindingItemActionBarBackstackBinding =
+            DataBindingUtil.setContentView(this, R.layout.item_action_bar_backstack)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_cart)
-        commonViewModel = ViewModelProvider(this)[CommonViewModel::class.java]
         binding.lifecycleOwner = this
+        bindingItemActionBarBackstackBinding.lifecycleOwner = this
+        commonViewModel = ViewModelProvider(this)[CommonViewModel::class.java]
         database = GadgetDatabase.getDatabase(context = this)
         progressBar.showProgressBar(ctx = this)
+        setDataToAppBar()
         setObserver()
-        binding.rvCart.layoutManager = LinearLayoutManager(this)
         getDataFromDataBase()
     }
 
@@ -94,6 +101,7 @@ class CartActivity : BaseActivity() {
      *
      */
     private fun getDataFromDataBase() {
+        binding.rvCart.layoutManager = LinearLayoutManager(this)
         lifecycleScope.launch {
             val entireDB = database.gadgetDao().getAllGadgets()
             entireDB?.value?.let { gadgetListFromDB?.addAll(it) }
@@ -117,5 +125,24 @@ class CartActivity : BaseActivity() {
             binding.clPlaceOrder.visibility = View.GONE
             binding.animEmptyCart.visibility = View.VISIBLE
         }
+    }
+
+
+    /**
+     * Set data to app bar
+     *
+     */
+    private fun setDataToAppBar() {
+        binding.listener = this
+        binding.title = CommonUtils.getString(name = R.string.lbl_my_cart)
+    }
+
+
+    /**
+     * Navigate to back stack
+     *
+     */
+    override fun navigateToBackStack() {
+        onBackPressed()
     }
 }

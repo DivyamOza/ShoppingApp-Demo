@@ -23,8 +23,10 @@
     <!-- End API Responses Status Strings -->
 
     <!-- Start Gadget Details Strings -->
+    <string name="lbl_my_cart">My Cart</string>
     <string name="lbl_buy_now">BUY NOW</string>
     <string name="lbl_add_to_cart">ADD TO CART</string>
+    <string name="lbl_go_to_cart">GO TO CART</string>
     <!-- End Gadget Details Strings -->
 
 
