@@ -44,4 +44,8 @@
     <string name="lbl_view_price_detail">View Price Details</string>
     <string name="lbl_place_order">Place Order</string>
     <!-- End Cart Activity Strings -->
+
+    <!-- Start Success Dialog with Animation String -->
+    <string name="lbl_item_add_to_cart">Item added to Cart</string>
+    <!-- End Success Dialog with Animation String -->
 </resources>

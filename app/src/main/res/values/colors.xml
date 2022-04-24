@@ -11,4 +11,5 @@
     <color name="orange_for_buy_now">#ff5800</color>
     <color name="green_for_rating">#008e00</color>
     <color name="light_gray">#1234</color>
+    <color name="black_transparent">#CE171717</color>
 </resources>

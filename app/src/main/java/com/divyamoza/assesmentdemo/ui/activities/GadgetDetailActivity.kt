@@ -2,13 +2,17 @@ package com.divyamoza.assesmentdemo.ui.activities
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.divyamoza.assesmentdemo.R
 import com.divyamoza.assesmentdemo.base.BaseActivity
 import com.divyamoza.assesmentdemo.databinding.ActivityGadgetDetailBinding
+import com.divyamoza.assesmentdemo.models.dbentity.Gadget
+import com.divyamoza.assesmentdemo.models.dbentity.GadgetDatabase
 import com.divyamoza.assesmentdemo.models.responses.Product
+import com.divyamoza.assesmentdemo.ui.fragments.SuccessDialogWithAnimation
 import com.divyamoza.assesmentdemo.utils.AppConstant
+import com.divyamoza.assesmentdemo.viewmodels.CommonViewModel
 import timber.log.Timber
 
 /**
@@ -17,16 +21,20 @@ import timber.log.Timber
  * @constructor Create empty Gadget detail activity
  */
 class GadgetDetailActivity : BaseActivity(), View.OnClickListener {
-    private lateinit var binding: ActivityGadgetDetailBinding
+    lateinit var binding: ActivityGadgetDetailBinding
+    lateinit var database: GadgetDatabase
     private var gadgetName: String? = ""
     private var gadgetPrice: String? = ""
     private var gadgetRating: String? = ""
     private var gadgetImageURL: String? = ""
+    private lateinit var commonViewModel: CommonViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_gadget_detail)
         binding.lifecycleOwner = this
+        database = GadgetDatabase.getDatabase(context = this)
+        commonViewModel = ViewModelProvider(this)[CommonViewModel::class.java]
         setListeners()
         getGadgetDetails()
         setGadgetDetails()
@@ -80,11 +88,23 @@ class GadgetDetailActivity : BaseActivity(), View.OnClickListener {
      */
     override fun onClick(v: View?) {
         when (v) {
+            // 'Add to Cart' Btn Click Event
             binding.btnAddToCart -> {
-                Toast.makeText(this, "Add To Cart", Toast.LENGTH_SHORT).show()
+                val gadgetObjectForDB =
+                    Gadget(
+                        name = gadgetName ?: "",
+                        price = gadgetPrice ?: "",
+                        rating = gadgetRating.toString().toInt(),
+                        image_url = gadgetImageURL ?: "",
+                        id = 0
+                    )
+                commonViewModel.addGadgetIntoDB(gadget = gadgetObjectForDB)
+                showSuccessDialog(isForAddToCart = true)
             }
+
+            // 'Buy Now' Btn Click Event
             binding.btnBuy -> {
-                Toast.makeText(this, "BUY", Toast.LENGTH_SHORT).show()
+                showSuccessDialog(isForAddToCart = false)
             }
         }
     }
@@ -97,5 +117,17 @@ class GadgetDetailActivity : BaseActivity(), View.OnClickListener {
     private fun setListeners() {
         binding.btnAddToCart.setOnClickListener(this)
         binding.btnBuy.setOnClickListener(this)
+    }
+
+
+    /**
+     * Show success dialog
+     *
+     * @param isForAddToCart
+     */
+    private fun showSuccessDialog(isForAddToCart: Boolean) {
+        val successDialogWithAnimation =
+            SuccessDialogWithAnimation(isForAddToCart = isForAddToCart)
+        successDialogWithAnimation.show(supportFragmentManager, "customDialog")
     }
 }
