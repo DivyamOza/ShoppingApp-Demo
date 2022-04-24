@@ -9,4 +9,8 @@ object AppConstant {
     const val price = "price"
     const val rating = "rating"
     const val image_url = "image_url"
+
+    // DataBase Constants
+    const val DB_NAME = "assessment_db"
+    const val DB_TABLE_NAME = "gadgets_cart"
 }

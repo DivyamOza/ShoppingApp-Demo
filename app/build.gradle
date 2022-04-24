@@ -87,4 +87,18 @@ dependencies {
 
     // Lottie Animation: Lib. for Beautiful Animations
     implementation 'com.airbnb.android:lottie:5.0.3'
+
+    // Room DataBaseL Lib. for Data Storage
+    def roomVersion = "2.4.2"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+
+    // To use Kotlin annotation processing tool (kapt)
+    kapt("androidx.room:room-compiler:$roomVersion")
+
+    // Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$roomVersion")
+
+    // Test helpers
+    testImplementation("androidx.room:room-testing:$roomVersion")
 }
