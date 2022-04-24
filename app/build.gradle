@@ -84,4 +84,7 @@ dependencies {
 
     // Motion Toast: Lib. for Beautiful Toasts Messages
     implementation 'com.github.Spikeysanju:MotionToast:1.4'
+
+    // Lottie Animation: Lib. for Beautiful Animations
+    implementation 'com.airbnb.android:lottie:5.0.3'
 }
