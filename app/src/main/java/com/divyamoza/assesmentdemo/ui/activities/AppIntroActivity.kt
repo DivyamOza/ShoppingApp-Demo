@@ -90,6 +90,17 @@ class AppIntroActivity : AppIntro() {
             imageDrawable = R.drawable.img_animations
         )
 
+        // Slider  7 - Beautiful Animations
+        addSlider(
+            title = CommonUtils.getString(
+                name = R.string.lbl_slider7_title
+            ),
+            description = CommonUtils.getString(
+                name = R.string.lbl_slider7_desc
+            ),
+            imageDrawable = R.drawable.img_proguard
+        )
+
         val appIntroComplete =
             Preferences.getPreferenceBoolean(context = this, key = AppConstant.PREF_APP_INTRO_DONE)
 
