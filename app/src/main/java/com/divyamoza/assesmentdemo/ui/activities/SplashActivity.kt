@@ -2,7 +2,6 @@ package com.divyamoza.assesmentdemo.ui.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import com.divyamoza.assesmentdemo.R
@@ -35,7 +34,7 @@ class SplashActivity : BaseActivity() {
             override fun run() {
                 try {
                     sleep((AppConstant.SPLASH_TIME * 1000).toLong())
-                    val i = Intent(baseContext, HomeActivity::class.java)
+                    val i = Intent(baseContext, AppIntroActivity::class.java)
                     startActivity(i)
                     finish()
                 } catch (e: Exception) {

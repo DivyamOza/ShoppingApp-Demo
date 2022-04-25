@@ -54,4 +54,19 @@
     <string name="lbl_congratulation">Congratulations</string>
     <string name="lbl_order_id">Your Order ID is 201707255362678</string>
     <!-- End Success Dialog with Animation String -->
+
+    <!-- Start App Intro Strings -->
+    <string name="lbl_slider1_title">Welcome…</string>
+    <string name="lbl_slider1_desc">This application have MVVM Arch. + DataBinding + Room Database</string>
+    <string name="lbl_slider2_title">Listings of Gadgets</string>
+    <string name="lbl_slider2_desc">Here, User can navigate to detail screen via tap to the view.</string>
+    <string name="lbl_slider3_title">Gadgets Detailed Screen</string>
+    <string name="lbl_slider3_desc">Here, User can Add to Cart/Go to Cart or Buy Now Directly</string>
+    <string name="lbl_slider4_title">Cart Screen</string>
+    <string name="lbl_slider4_desc">User can delete gadgets or User can place order with specific Quantity</string>
+    <string name="lbl_slider5_title">Order Placed Screen</string>
+    <string name="lbl_slider5_desc">Here, User see their order id for the same.</string>
+    <string name="lbl_slider6_title">Beautiful Animations</string>
+    <string name="lbl_slider6_desc">Gave Fresh look with Beautiful Animations and UI.</string>
+    <!-- End App Intro Strings -->
 </resources>

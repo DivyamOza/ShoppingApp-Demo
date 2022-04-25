@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AssesmentDemo">
         <activity
+            android:name=".ui.activities.AppIntroActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activities.OrderSuccessActivity"
             android:exported="false" />
         <activity

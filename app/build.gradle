@@ -106,4 +106,7 @@ dependencies {
 
     // Shimmer Animation: Lib. for Animation while Loading Data
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
+    // AppIntro Lib. for Application Intro first time
+    implementation 'com.github.AppIntro:AppIntro:6.2.0'
 }

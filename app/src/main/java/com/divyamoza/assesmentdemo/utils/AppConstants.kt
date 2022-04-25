@@ -19,4 +19,8 @@ object AppConstant {
 
     // Delay for Place Orders
     const val DELAY_TO_PLACE_ORDER: Long = 30000
+
+    // Preferences
+    const val PREF_FILE_NAME = "pref_assesment_demo"
+    const val PREF_APP_INTRO_DONE = "app_intro_done"
 }
