@@ -102,9 +102,9 @@ class GadgetDetailActivity : BaseActivity(), NavigateToOrderSuccess,
      *
      * @param isForAddToCart
      */
-    private fun showSuccessDialog(isForAddToCart: Boolean) {
+    private fun showSuccessDialog() {
         val successDialogWithAnimation =
-            SuccessDialogWithAnimation(isForAddToCart = isForAddToCart)
+            SuccessDialogWithAnimation()
         successDialogWithAnimation.show(supportFragmentManager, "customDialog")
     }
 
@@ -165,7 +165,7 @@ class GadgetDetailActivity : BaseActivity(), NavigateToOrderSuccess,
                     id = 0
                 )
             commonViewModel.addGadgetIntoDB(gadget = gadgetObjectForDB)
-            showSuccessDialog(isForAddToCart = true)
+            showSuccessDialog()
         }
     }
 }

@@ -19,7 +19,7 @@ import timber.log.Timber
  * @property isForAddToCart
  * @constructor Create empty Success dialog with animation
  */
-class SuccessDialogWithAnimation(var isForAddToCart: Boolean) :
+class SuccessDialogWithAnimation() :
     DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,35 +35,31 @@ class SuccessDialogWithAnimation(var isForAddToCart: Boolean) :
             inflater, R.layout.dialog_success, container, false
         )
         val view: View = binding.root
-        binding.isForAddToCart = isForAddToCart
-        if (isForAddToCart) {
-            if (isForAddToCart) {
-                CommonUtils.showSuccessToast(
-                    requireActivity(),
-                    message = CommonUtils.getString(name = R.string.lbl_item_add_to_cart)
-                )
-                binding.animAddToCart.addAnimatorListener(object :
-                    Animator.AnimatorListener {
-                    override fun onAnimationStart(animation: Animator?) {
-                        Timber.e("Animation:", "start")
-                    }
-
-                    override fun onAnimationEnd(animation: Animator?) {
-                        Timber.e("Animation:", "end")
-                        binding.animAddToCart.visibility = View.GONE
-                        dialog?.dismiss()
-                    }
-
-                    override fun onAnimationCancel(animation: Animator?) {
-                        Timber.e("Animation:", "cancel")
-                    }
-
-                    override fun onAnimationRepeat(animation: Animator?) {
-                        Timber.e("Animation:", "repeat")
-                    }
-                })
+        dialog?.setCancelable(false)
+        CommonUtils.showSuccessToast(
+            requireActivity(),
+            message = CommonUtils.getString(name = R.string.lbl_item_add_to_cart)
+        )
+        binding.animAddToCart.addAnimatorListener(object :
+            Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator?) {
+                Timber.e("Animation:", "start")
             }
-        }
+
+            override fun onAnimationEnd(animation: Animator?) {
+                Timber.e("Animation:", "end")
+                binding.animAddToCart.visibility = View.GONE
+                dialog?.dismiss()
+            }
+
+            override fun onAnimationCancel(animation: Animator?) {
+                Timber.e("Animation:", "cancel")
+            }
+
+            override fun onAnimationRepeat(animation: Animator?) {
+                Timber.e("Animation:", "repeat")
+            }
+        })
         return view
     }
 
