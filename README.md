@@ -1,7 +1,7 @@
 
-# Assessment-Demo
+# ShoppingApp-Demo
 
-Assessment Demo is an application that has MVVM Architecture, Room Database, and DataBinding.
+ShoppingApp Demo is an application that has MVVM Architecture, Room Database, and DataBinding.
 
 
 ## Features
@@ -17,7 +17,7 @@ Assessment Demo is an application that has MVVM Architecture, Room Database, and
 
 ## Screenshots
 - **Listing of Gadgets**
-![App Screenshot](https://raw.githubusercontent.com/DivyamOza/Assesment-Demo/main/app/src/main/res/drawable/img_listing.jpg)
+![App Screenshot])
 - ------------------------------------------------
 - **Gadget Detail Screen**
 ![App Screenshot](https://raw.githubusercontent.com/DivyamOza/Assesment-Demo/main/app/src/main/res/drawable/img_gadget_detail.jpg)
